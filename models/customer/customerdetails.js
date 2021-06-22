@@ -1,0 +1,59 @@
+class Customer{
+    constructor(dao){
+        this.dao = dao
+    }
+
+    CreateCustomerTable(){
+        const sql = `CREATE TABLE IF NOT EXISTS customer(
+            userId INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+            first_name TEXT NOT NULL,
+            last_name TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            gender TEXT NOT NULL,
+            phone_number TEXT NOT NULL,
+            password TEXT NOT NULL
+        )`
+
+        return this.dao.run(sql)
+    }
+
+    addCustomer(firstname, lastname, email, gender, phonenumber, password){
+        const sql = `INSERT INTO customer (first_name, last_name, email, gender, phone_number, password) VALUES (?, ?, ?, ?, ?, ?)`
+        const params = [firstname, lastname, email, gender, phonenumber, password]
+        return this.dao.run(sql, params)
+    }
+
+    updateCustomer(firstname, lastname, phonenumber, password, user_id){
+        const sql = `UPDATE customer SET first_name = ?, last_name = ?, phone_number = ?, password = ? WHERE userId = ?`
+        const params = [firstname,lastname, phonenumber, password, user_id]
+        return this.dao.run(sql, params)
+
+    }
+
+    deleteCustomer(userId){
+        const sql = `DELETE FROM customer WHERE userId = ?`
+        const params = [userId]
+        return this.dao.delete(sql, params)
+    }
+
+    getCustomerById(id){
+        const sql = `SELECT * FROM customer WHERE userId = ?`
+        const params = [id]
+        return this.dao.get(sql, params)
+    }
+
+    getCustomerByEmail(email){
+        const sql = `SELECT * FROM customer WHERE email = ?`
+        const params = [email]
+        return this.dao.get(sql, params)
+    }
+
+    getFarmerByEmailAndPassword(email, password){
+        const sql = `SELECT * FROM customer WHERE email = ? AND password = ?`
+        const params = [email, password]
+        return this.dao.get(sql, params)
+    }
+
+}
+
+module.exports = Customer
