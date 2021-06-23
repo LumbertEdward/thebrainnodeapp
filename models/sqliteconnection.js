@@ -7,9 +7,6 @@ class FarmerConnection{
             if(err){
                 console.log("Not Connected")
             }
-            else{
-                console.log("Connected")
-            }
         })
     }
 

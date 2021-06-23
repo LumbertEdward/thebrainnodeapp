@@ -1,8 +1,10 @@
 const FarmerConnection = require('../models/sqliteconnection')
 const AgriculturalProduct = require('../models/Farmer/productdetails')
-const conn = new FarmerConnection('./farmer')
+const conn = new FarmerConnection('./agriculture')
 const farmer = new AgriculturalProduct(conn)
 const { body,validationResult } = require('express-validator')
+const path = require('path')
+const url = "http://localhost:9000/images/products/"
 
 exports.ViewProducts = function(req, res, next){
     var farmer_id = req.params.id
@@ -18,15 +20,19 @@ exports.AddProduct = function(req, res, next){
     var product_name = req.body.product_name
     var product_description = req.body.product_description
     var product_price = req.body.product_price
-    var product_image = req.body.product_image
+    var product_image = url + Date.now() + path.extname(req.file.filename)
     if (errors.isEmpty) {
-        farmer.createProductsTable()
-        .then(() => farmer.addProduct(farmer_id, product_name, product_description, product_price, product_image))
-        .then(() => farmer.viewAllFarmerProducts(farmer_id))
-        .then((data) => {
-            res.json({message: "Added Successfully"})
-        })
-
+        if (!req.file) {
+            res.json({message: "Image Missing"})
+        }
+        else{
+            farmer.createProductsTable()
+            .then(() => farmer.addProduct(farmer_id, product_name, product_description, product_price, product_image))
+            .then(() => farmer.viewAllFarmerProducts(farmer_id))
+            .then(() => {
+                res.json({message: "Added Successfully"})
+            })
+        }
     }
     else{
         res.json({error: errors.array()})

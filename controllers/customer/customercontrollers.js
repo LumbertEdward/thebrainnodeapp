@@ -3,7 +3,7 @@ const CustomerRegister = require('../../models/customer/customerdetails')
 const CustomerOrders = require('../../models/customer/customerorders')
 const FarmerProducts = require('../../models/Farmer/productdetails')
 const ShoppingCart = require('../../models/customer/shoppingcart')
-const conn = new CustomerConnection('./farmer')
+const conn = new CustomerConnection('./agriculture')
 const customer = new CustomerRegister(conn)
 const orders = new CustomerOrders(conn)
 const farmerProds = new FarmerProducts(conn)
@@ -11,6 +11,8 @@ const shopping = new ShoppingCart(conn)
 const { body,validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs');
+const path = require('path')
+const url = "http://localhost:9000/images/profile/"
 
 exports.Login = function(req, res){
     var errors = validationResult(req)
@@ -45,16 +47,23 @@ exports.Register = function(req, res){
     var gender = req.body.gender
     var phone_number = req.body.phone_number
     var password = req.body.password
+    var profile_img = url + Date.now() + path.extname(req.file.filename)
     if (errors.isEmpty) {
-        customer.CreateCustomerTable()
-        .then(() => customer.addCustomer(first_name, last_name, email, gender, phone_number, password))
-        .then(() => customer.getCustomerByEmail(email))
-        .then((data) => {
-            res.json({message: "Successfully Registered", data})
-        })
-        .catch((err) => {
-            res.json({message: "Not Registered", error: err})
+        if (!req.file) {
+            res.json({message: "Image Missing"})
+        }
+        else{
+            customer.CreateCustomerTable()
+            .then(() => customer.addCustomer(first_name, last_name, email, gender, phone_number, password, profile_img))
+            .then(() => customer.getCustomerByEmail(email))
+            .then((data) => {
+                res.json({message: "Successfully Registered", data})
             })
+            .catch((err) => {
+                res.json({message: "Not Registered", error: err})
+                })
+            }
+        
         }
     else{
         res.json({error: errors.array()})

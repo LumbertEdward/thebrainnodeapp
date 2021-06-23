@@ -1,8 +1,10 @@
 const FarmerConnection = require('../models/sqliteconnection')
 const FarmInputsRecommendation = require('../models/Farmer/farminputsrecommendations')
-const conn = new FarmerConnection('./farmer')
+const conn = new FarmerConnection('./agriculture')
 const farminputs = new FarmInputsRecommendation(conn)
 const { body,validationResult } = require('express-validator')
+const path = require('path')
+const url = "http://localhost:9000/images/products/"
 
 exports.AddFarmInput = function(req, res) {
     var errors = validationResult(req)
@@ -10,16 +12,23 @@ exports.AddFarmInput = function(req, res) {
     var farm_input_description = req.body.farm_input_description
     var farm_input_type = req.body.farm_input_type
     var associated_product = req.body.associated_product
+    var farm_input_img = url + Date.now() + path.extname(req.file.filename)
 
     if (errors.isEmpty) {
-        farminputs.createFarmInputsTable()
-        .then(() => farminputs.addSmartFarmInputs(farm_input_name, farm_input_description, farm_input_type, associated_product))
-        .then(() => {
-            res.json({message: "Farm Input Added"})
-        })
-        .catch((err) => {
-            res.json({message: err})
-        })
+        if (!req.file) {
+            res.json({message: "Missing Image"})
+        }
+        else{
+            farminputs.createFarmInputsTable()
+            .then(() => farminputs.addSmartFarmInputs(farm_input_name, farm_input_description, farm_input_type, associated_product, farm_input_img))
+            .then(() => {
+                res.json({message: "Farm Input Added"})
+            })
+            .catch((err) => {
+                res.json({message: err})
+            })
+        }
+        
     }
     else{
         res.json({message: "Error"})

@@ -1,7 +1,7 @@
 const FarmerConnection = require('../models/sqliteconnection')
 const FarmerFaq = require('../models/Farmer/farmerfaqstable')
 const FaqReplies = require('../models/Farmer/faqsreplies')
-const conn = new FarmerConnection('./farmer')
+const conn = new FarmerConnection('./agriculture')
 const farmer = new FarmerFaq(conn)
 const replies = new FaqReplies(conn)
 const { body,validationResult } = require('express-validator')

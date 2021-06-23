@@ -1,6 +1,6 @@
 const FarmerConnection = require('../models/sqliteconnection')
 const FarmerOrders = require('../models/Farmer/farmerordersdetails')
-const conn = new FarmerConnection('./farmer')
+const conn = new FarmerConnection('./agriculture')
 const farmer = new FarmerOrders(conn)
 const { body,validationResult } = require('express-validator')
 

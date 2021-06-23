@@ -1,10 +1,12 @@
 const FarmerConnection = require('../models/sqliteconnection')
 const AgriculturalTraining = require('../models/Farmer/agriculturaltrainingmodel')
 const EnrolledTrainings = require('../models/Farmer/enrolledtrainings')
-const conn = new FarmerConnection('./farmer')
+const conn = new FarmerConnection('./agriculture')
 const farmer = new AgriculturalTraining(conn)
 const enrolled = new EnrolledTrainings(conn)
 const { body,validationResult } = require('express-validator')
+const path = require('path')
+const url = "http://localhost:9000/images/trainings/"
 
 exports.CreateTraining = function(req, res){
     var training_subject = req.body.training_subject
@@ -14,14 +16,20 @@ exports.CreateTraining = function(req, res){
     var training_duration = req.body.training_duration
     var application_deadline = req.body.application_deadline
     var number_of_attendees = req.body.number_of_attendees
-    farmer.createAgriculturalTrainingTable()
-    .then(() => farmer.addTraining(training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees))
-    .then(() => {
-        res.json({message: "Training Added"})
-    })
-    .catch((err) => {
-        res.json({error: err})
-    })
+    var training_img_url = url + Date.now() + path.extname(req.file.filename)
+    if (!req.file) {
+        res.json({message: "Image Missing"})
+    }
+    else{
+        farmer.createAgriculturalTrainingTable()
+        .then(() => farmer.addTraining(training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url))
+        .then(() => {
+            res.json({message: "Training Added"})
+        })
+        .catch((err) => {
+            res.json({error: err})
+        })
+    }
 }
 
 exports.ViewTrainings = function(req, res){

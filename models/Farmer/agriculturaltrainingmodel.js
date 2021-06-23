@@ -12,15 +12,16 @@ class AgriculturalTraining{
             training_location TEXT NOT NULL,
             training_duration INTEGER NOT NULL,
             application_deadline TEXT NOT NULL,
-            number_of_attendees INTEGER NOT NULL
+            number_of_attendees INTEGER NOT NULL,
+            training_img_url TEXT NOT NULL
         )`
 
         return this.dao.run(sql)
     }
 
-    addTraining(training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees){
-        const sql = `INSERT INTO agriculturaltrainingStable (training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees) VALUES (?, ?, ?, ?, ?, ?, ?)`
-        const params = [training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees]
+    addTraining(training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url){
+        const sql = `INSERT INTO agriculturaltrainingStable (training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+        const params = [training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url]
         return this.dao.run(sql, params)
     }
 
@@ -36,9 +37,9 @@ class AgriculturalTraining{
         return this.dao.get(sql, params)
     }
 
-    updateTraining(training_id, training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees){
-        const sql = `UPDATE agriculturaltrainingStable SET training_subject = ?, training_date = ?, training_description = ?, training_location = ?, training_duration = ?, application_deadline = ?, number_of_attendees = ? WHERE training_id = ?`
-        const params = [training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_id]
+    updateTraining(training_id, training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url){
+        const sql = `UPDATE agriculturaltrainingStable SET training_subject = ?, training_date = ?, training_description = ?, training_location = ?, training_duration = ?, application_deadline = ?, number_of_attendees = ?, training_img_url = ? WHERE training_id = ?`
+        const params = [training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url, training_id]
         return this.dao.run(sql, params)
     }
 
