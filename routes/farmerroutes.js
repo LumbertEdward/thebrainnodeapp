@@ -74,8 +74,8 @@ router.get('/:farmer_id/yields/:yield_id/delete', DeleteYield) //delete a farmer
 
 /* GET FARMER SALES AND REVENUE STATISTICS */
 router.post('/:farmer_id/sales/add', AddSalesAndRevenue) //add sales made by farmer
+router.get('/:farmer_id/sales/view', ViewFarmerSalesAndRevenue) //view the sales made by farmer
 router.post('/:farmer_id/sales/:sales_id/update', UpdateFarmerSalesAndRevenue) //update sales made by farmer
-router.get('/:farmer_id/sales/:sales_id/view', ViewFarmerSalesAndRevenue) //view the sales made by farmer
 router.get('/:farmer_id/sales/:sales_id/delete', DeleteSalesAndRevenue) //delete the sales made by farmer
 
 module.exports = router;

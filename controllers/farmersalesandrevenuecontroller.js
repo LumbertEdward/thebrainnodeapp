@@ -6,7 +6,7 @@ const { body,validationResult } = require('express-validator')
 
 exports.AddSalesAndRevenue = function(req, res){
     var errors = validationResult(req)
-    var farmer_id = req.body.farmer_id
+    var farmer_id = req.params.farmer_id
     var item_sold = req.body.item_sold
     var total_items_sold = req.body.total_items_sold
     var items_cost = req.body.items_cost

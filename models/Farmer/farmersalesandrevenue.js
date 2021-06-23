@@ -8,7 +8,7 @@ class SalesAndRevenue{
             sales_id INTEGER PRIMARY KEY AUTOINCREMENT,
             farmer_id INTEGER NOT NULL,
             item_sold TEXT NOT NULL,
-            total_items_sold INTEGER NOT NULL,
+            total_items_sold TEXT NOT NULL,
             items_cost INTEGER NOT NULL,
             amount_received INTEGER NOT NULL,
             date_sold TEXT NOT NULL
@@ -26,7 +26,7 @@ class SalesAndRevenue{
 
     viewFarmerSalesAndRevenue(farmer_id){
         const sql = `SELECT * FROM salesandrevenuetable WHERE farmer_id = ?`
-        const sql = [farmer_id]
+        const params = [farmer_id]
         return this.dao.all(sql, params)
     }
 
