@@ -1,6 +1,6 @@
 var express = require('express');
 const { NewRecommendation, RecommendByRainfall, RecommendByTemperature, RecommendBySoilType, RecommendationDetails } = require('../controllers/croprecommendationcontroller');
-const { FarmerRegister, FarmerLogin, ShowFarmerProfile, ShowFarmers } = require('../controllers/farmercontrollers');
+const { FarmerRegister, FarmerLogin, ShowFarmerProfile, ShowFarmers, UpdateFarmerProfile } = require('../controllers/farmercontrollers');
 const { ViewFarmerFaq, ViewAllFarmersFaq, ReplyFaq, ViewReplies, AddFaq } = require('../controllers/farmerfaqcontroller');
 const { MyOrders, MarkOrderAsComplete, ViewOrderDetails, RemoveOrder, FarmerPendingOrders, FarmerCompletedOrders } = require('../controllers/farmerorderscontroller');
 const { AddProduct, ViewProducts, ViewSelectedProductDetails, UpdateSelectedProduct, DeleteSelectedProduct } = require('../controllers/farmerproductscontroller');
@@ -56,6 +56,7 @@ router.post('/register', upload, urlencodedParser, FarmerRegister) //register fa
 router.post('/login', urlencodedParser, FarmerLogin) //login farmer
 router.get('/allfarmers', ShowFarmers) //view all farmers admin
 router.get('/allfarmers/:id/profile', ShowFarmerProfile) //view farmer profile
+router.get('/allfarmers/:id/profile/update', upload, urlencodedParser, UpdateFarmerProfile) //update farmer profile
 
 /* GET FARMER PRODUCTS */ 
 router.get('/:id/products', ViewProducts) //view farmer product

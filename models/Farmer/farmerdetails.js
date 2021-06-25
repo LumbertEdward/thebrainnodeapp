@@ -26,9 +26,9 @@ class FarmerRegistration{
         return this.dao.run(sql, params)
     }
 
-    updateFarmer(firstname, email){
-        const sql = `UPDATE farmer SET first_name = ? WHERE farmer_id = ?`
-        const params = [firstname, email]
+    updateFarmer(firstname, lastname, phonenumbr, bio, profilepic, idNumber, farmer_id){
+        const sql = `UPDATE farmer SET first_name = ?, last_name = ?, phone_number = ?, bio = ?, profile_pic = ?, id_number = ? WHERE farmer_id = ?`
+        const params = [firstname, lastname, phonenumbr, bio, profilepic, idNumber, farmer_id]
         return this.dao.run(sql, params)
 
     }

@@ -68,13 +68,44 @@ exports.FarmerLogin = function(req, res){
 }
 
 exports.ShowFarmerProfile = function(req, res, next){
-    farmer.getFarmerById(req.params.user_id)
+    farmer.getFarmerById(req.params.id)
     .then((data) => {
         res.json(data)
     })
     .catch((err) => {
         res.json({err: err})
     })
+}
+
+exports.UpdateFarmerProfile = function(req, res){
+    var errors = validationResult(req)
+    var firstname = req.body.first_name
+    var lastname = req.body.last_name
+    var phonenumbr = req.body.phone_number
+    var profilepic = url + Date.now() + path.extname(req.file.filename)
+    var bio = req.params.bio
+    var idNumber = req.body.id_number
+    var farmer_id = req.params.id
+
+    if (errors.isEmpty) {
+        if (!req.file) {
+            res.json({message: "No File"})
+        }
+        else{
+            farmer.updateFarmer(firstname, lastname, phonenumbr, bio, profilepic, idNumber, farmer_id)
+            .then(() => {
+                res.json({message: "Updated"})
+            })
+            .catch((err) => {
+                res.json({message: err})
+            })
+        }
+        
+    }
+    else{
+        res.json({message: "Error"})
+    }
+    
 }
 
 exports.ShowFarmers = function(req, res, next){

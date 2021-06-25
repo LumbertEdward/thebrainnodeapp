@@ -24,9 +24,9 @@ class Customer{
         return this.dao.run(sql, params)
     }
 
-    updateCustomer(firstname, lastname, phonenumber, password, user_id, profile_img = " "){
-        const sql = `UPDATE customer SET first_name = ?, last_name = ?, phone_number = ?, password = ?, profile_img = ? WHERE userId = ?`
-        const params = [firstname,lastname, phonenumber, password, profile_img, user_id]
+    updateCustomer(firstname, lastname, phonenumber, user_id, profile_img = " "){
+        const sql = `UPDATE customer SET first_name = ?, last_name = ?, phone_number = ?, profile_img = ? WHERE userId = ?`
+        const params = [firstname,lastname, phonenumber, profile_img, user_id]
         return this.dao.run(sql, params)
 
     }

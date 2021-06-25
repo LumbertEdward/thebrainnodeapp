@@ -82,6 +82,35 @@ exports.showCustomerProfile = function(req, res) {
     })
 }
 
+exports.UpdateCustomerProfile = function(req, res){
+    var errors = validationResult(req)
+    var firstname = req.body.first_name
+    var lastname = req.body.last_name
+    var phonenumber = req.body.phone_number
+    var profile_img = url + Date.now() + path.extname(req.file.filename)
+    var user_id = req.params.user_id
+
+    if (errors.isEmpty) {
+        if (!req.file) {
+            res.json({message: "No File"})
+        }
+        else{
+            customer.updateCustomer(firstname, lastname, phonenumber, user_id, profile_img)
+            .then(() => {
+                res.json({message: "Updated"})
+            })
+            .catch((err) => {
+                res.json({message: err})
+            })
+        }
+        
+    }
+    else{
+        res.json({message: "Error"})
+    }
+    
+}
+
 //products
 
 exports.Products = function(req, res){
