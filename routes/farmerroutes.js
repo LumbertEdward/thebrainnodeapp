@@ -54,7 +54,7 @@ const uploadproducts = multer({storage: productsstorage}).single('image')
 /* GET Farmer. */
 router.post('/register', upload, urlencodedParser, FarmerRegister) //register farmer
 router.post('/login', urlencodedParser, FarmerLogin) //login farmer
-router.get('/allfarmers', ShowFarmers) //view all farmers
+router.get('/allfarmers', ShowFarmers) //view all farmers admin
 router.get('/allfarmers/:id/profile', ShowFarmerProfile) //view farmer profile
 
 /* GET FARMER PRODUCTS */ 
@@ -64,7 +64,7 @@ router.get('/:id/products/:product_id', ViewSelectedProductDetails) //view produ
 router.post('/:id/products/:product_id/update', urlencodedParser, UpdateSelectedProduct) //update product details
 router.get('/:id/products/:product_id/delete', DeleteSelectedProduct) //delete a product
 
-/* GET FARMER-SUPPLIERS ORDERS */
+/* GET FARMER-CUSTOMER ORDERS */
 router.get('/:farmer_id/orders', MyOrders) //view farmer orders
 router.get('/:farmer_id/orders/:order_id', ViewOrderDetails) //view an order details
 router.get('/:farmer_id/orders/pending/all', FarmerPendingOrders) //view all pending orders of a farmer
@@ -83,7 +83,7 @@ router.get('/faqs/:faq_id/reply', ViewReplies) //view all replies of a faq
 
 /* GET AGRICULTURAL TRAINING */
 router.get('/trainings', ViewTrainings) //view all trainings
-router.post('/trainings/add', uploadtraining, urlencodedParser, CreateTraining) //create a training program
+router.post('/trainings/add', uploadtraining, urlencodedParser, CreateTraining) //create a training program admin
 router.get('/trainings/:training_id/details', TrainingDetails) //view details of a training program
 router.post('/trainings/:training_id/update', urlencodedParser, UpdateTraining) //update details of a training program by admin only
 router.post('/trainings/:training_id/attend', urlencodedParser, EnrollForTrainings) //enroll for a training
@@ -99,7 +99,7 @@ router.get('/recommendedcrops/search/:crop_id/details', RecommendationDetails) /
 
 /* GET RECOMMENDED FARM INPUTS */
 router.post('/recommendedfarminput/add', uploadproducts, urlencodedParser, AddFarmInput) //add recommended farm input by admin
-router.get('/recommendedfarminput/Recommendations/all', AllRecommendations) //view all farm input recommendations
+router.get('/recommendedfarminput/Recommendations/all', AllRecommendations) //view all farm input recommendations 
 router.post('/recommendedfarminput/search/byequipment', urlencodedParser, RecommendedEquipment) //search farm inputs by equipment
 router.post('/recommendedfarminput/search/byfeed', urlencodedParser, RecommendedFeed) //search recommended farm input by feed
 router.post('/recommendedfarminput/search/byseed', urlencodedParser, RecommendedSeed) //search recommended farm input by seed
