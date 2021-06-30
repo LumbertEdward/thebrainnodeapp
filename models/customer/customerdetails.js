@@ -49,10 +49,16 @@ class Customer{
         return this.dao.get(sql, params)
     }
 
-    getFarmerByEmailAndPassword(email, password){
+    getCustomerByEmailAndPassword(email, password){
         const sql = `SELECT * FROM customer WHERE email = ? AND password = ?`
         const params = [email, password]
         return this.dao.get(sql, params)
+    }
+
+    getAllCustomers(){
+        const sql = `SELECT * FROM customer`
+        const params = []
+        return this.dao.all(sql, params)
     }
 
 }

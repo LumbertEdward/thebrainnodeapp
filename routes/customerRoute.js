@@ -1,5 +1,5 @@
 var express = require('express');
-const { ProductDetails, Products, Login, Register, AddToCart, ViewShoppingCartItems, ViewShoppingCartItemsDetails, RemoveItemFromCart, MakeOrder, ViewMyOrders, MypendingOrders, MyCompletedOrders, showCustomerProfile, UpdateCustomerProfile } = require('../controllers/customer/customercontrollers');
+const { ProductDetails, Products, Login, Register, AddToCart, ViewShoppingCartItems, ViewShoppingCartItemsDetails, RemoveItemFromCart, MakeOrder, ViewMyOrders, MypendingOrders, MyCompletedOrders, showCustomerProfile, UpdateCustomerProfile, showAllTheCustomers } = require('../controllers/customer/customercontrollers');
 const { route } = require('./farmerroutes');
 var router = express.Router();
 var urlencodedParser = express.urlencoded({ extended: false })
@@ -17,13 +17,14 @@ const storage = multer.diskStorage({
     }
   })
   
-const upload = multer({storage: storage}).single('image')
+const upload = multer({storage: storage}).single('file')
 
 /* GET users listing. */
 router.post('/login', urlencodedParser, Login) //login customer
 router.post('/register', upload, urlencodedParser, Register) //register customer
 router.get('/:user_id/profile', showCustomerProfile) //show profile
 router.get('/:user_id/profile/update', upload, urlencodedParser, UpdateCustomerProfile) //update profile
+router.get('/all', showAllTheCustomers)
 
 /* GET PRODUCTS */
 router.get('/products', Products) //view products

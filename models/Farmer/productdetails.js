@@ -46,6 +46,11 @@ class AgriculturalProduct{
         return this.dao.all(sql, params)
     }
 
+    deleteAllProducts(){
+        const sql = `DROP TABLE farmerproducts`
+        return this.dao.run(sql)
+    }
+
     //customer
 
     viewAllOrders(){

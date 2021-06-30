@@ -19,7 +19,7 @@ class AgriculturalTraining{
         return this.dao.run(sql)
     }
 
-    addTraining(training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url){
+    addTraining(training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url = " "){
         const sql = `INSERT INTO agriculturaltrainingStable (training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
         const params = [training_subject, training_date, training_description, training_location, training_duration, application_deadline, number_of_attendees, training_img_url]
         return this.dao.run(sql, params)

@@ -12,23 +12,17 @@ exports.AddFarmInput = function(req, res) {
     var farm_input_description = req.body.farm_input_description
     var farm_input_type = req.body.farm_input_type
     var associated_product = req.body.associated_product
-    var farm_input_img = url + Date.now() + path.extname(req.file.filename)
+    var farm_input_img = url + req.file.filename
 
     if (errors.isEmpty) {
-        if (!req.file) {
-            res.json({message: "Missing Image"})
-        }
-        else{
-            farminputs.createFarmInputsTable()
-            .then(() => farminputs.addSmartFarmInputs(farm_input_name, farm_input_description, farm_input_type, associated_product, farm_input_img))
-            .then(() => {
-                res.json({message: "Farm Input Added"})
-            })
-            .catch((err) => {
-                res.json({message: err})
-            })
-        }
-        
+        farminputs.createFarmInputsTable()
+        .then(() => farminputs.addSmartFarmInputs(farm_input_name, farm_input_description, farm_input_type, associated_product, farm_input_img))
+        .then(() => {
+            res.json({message: "Farm Input Added"})
+        })
+        .catch((err) => {
+            res.json({message: err})
+        })
     }
     else{
         res.json({message: "Error"})

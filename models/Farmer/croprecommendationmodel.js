@@ -19,7 +19,7 @@ class CropRecommendation{
         return this.dao.run(sql)
     }
 
-    addSmartCrops(crop_name, crop_description, soil_type, lowest_temperature, highest_temperature, lowest_rainfall, highest_rainfall, crop_img){
+    addSmartCrops(crop_name, crop_description, soil_type, lowest_temperature, highest_temperature, lowest_rainfall, highest_rainfall, crop_img = " "){
         const sql = `INSERT INTO recommendedcrops (crop_name, crop_description, soil_type, lowest_temperature, highest_temperature, lowest_rainfall, highest_rainfall, crop_img) VALUES (?,?,?,?,?,?,?,?)`
         const params = [crop_name, crop_description, soil_type, lowest_temperature, highest_temperature, lowest_rainfall, highest_rainfall, crop_img]
         return this.dao.run(sql, params)

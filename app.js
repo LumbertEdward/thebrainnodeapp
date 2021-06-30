@@ -4,9 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
+var multer = require('multer');
 
 var farmerRouter = require('./routes/farmerroutes');
 var customerRouter = require('./routes/customerRoute');
+const { use } = require('./routes/farmerroutes');
 
 var app = express();
 
@@ -15,12 +17,13 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use('/public/images/', express.static('./public/images'));
 app.use(cors());
+app.use(logger('dev'));
 
 app.use('/farmer', farmerRouter);
 app.use('/customer', customerRouter);

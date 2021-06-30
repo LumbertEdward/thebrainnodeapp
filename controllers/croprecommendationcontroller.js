@@ -15,21 +15,16 @@ exports.NewRecommendation = function(req, res){
     var highest_temperature = req.body.highest_temperature
     var lowest_rainfall = req.body.lowest_rainfall
     var highest_rainfall = req.body.highest_rainfall
-    var crop_img = url + Date.now() + path.extname(req.file.filename)
+    var crop_img = url + req.file.filename
     if (errors.isEmpty) {
-        if (!req.file) {
-            res.json({message: "Image Missing"})
-        }
-        else{
-            farmer.createRecommendationsTable()
-            .then(() => farmer.addSmartCrops(crop_name, crop_description, soil_type, lowest_temperature, highest_temperature, lowest_rainfall, highest_rainfall, crop_img))
-            .then(() => {
-                res.json({message: "Added"})
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        }
+        farmer.createRecommendationsTable()
+        .then(() => farmer.addSmartCrops(crop_name, crop_description, soil_type, lowest_temperature, highest_temperature, lowest_rainfall, highest_rainfall, crop_img))
+        .then(() => {
+            res.json({message: "Added"})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
     else{
         res.json({message: "Error"})

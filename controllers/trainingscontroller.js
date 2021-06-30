@@ -9,6 +9,7 @@ const path = require('path')
 const url = "http://localhost:9000/images/trainings/"
 
 exports.CreateTraining = function(req, res){
+    const errors = validationResult(req)
     var training_subject = req.body.training_subject
     var training_date = req.body.training_date
     var training_description = req.body.training_description
@@ -16,9 +17,9 @@ exports.CreateTraining = function(req, res){
     var training_duration = req.body.training_duration
     var application_deadline = req.body.application_deadline
     var number_of_attendees = req.body.number_of_attendees
-    var training_img_url = url + Date.now() + path.extname(req.file.filename)
-    if (!req.file) {
-        res.json({message: "Image Missing"})
+    var training_img_url = url + req.file.filename
+    if (errors) {
+        res.json({message: "Error"})
     }
     else{
         farmer.createAgriculturalTrainingTable()

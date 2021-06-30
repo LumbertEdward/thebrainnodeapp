@@ -20,7 +20,7 @@ class FarmerRegistration{
         return this.dao.run(sql)
     }
 
-    insertFarmer(firstname, lastname, email, gender, phonenumbr, bio, profilepic, idNumber, password){
+    insertFarmer(firstname, lastname, email, gender, phonenumbr, bio, profilepic = " ", idNumber, password){
         const sql = `INSERT INTO farmer (first_name, last_name, email, gender, phone_number, bio, profile_pic, id_number, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
         const params = [firstname, lastname, email, gender, phonenumbr, bio, profilepic, idNumber, password]
         return this.dao.run(sql, params)

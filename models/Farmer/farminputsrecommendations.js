@@ -16,7 +16,7 @@ class FarmInputsRecommendation{
         return this.dao.run(sql)
     }
 
-    addSmartFarmInputs(farm_input_name, farm_input_description, farm_input_type, associated_product, farm_input_img){
+    addSmartFarmInputs(farm_input_name, farm_input_description, farm_input_type, associated_product, farm_input_img = " "){
         const sql = `INSERT INTO recommendedfarminputs (farm_input_name, farm_input_description, farm_input_type, associated_product, farm_input_img) VALUES (?,?,?,?,?)`
         const params = [farm_input_name, farm_input_description, farm_input_type, associated_product, farm_input_img]
         return this.dao.run(sql, params)

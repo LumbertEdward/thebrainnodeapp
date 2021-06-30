@@ -47,28 +47,22 @@ exports.Register = function(req, res){
     var gender = req.body.gender
     var phone_number = req.body.phone_number
     var password = req.body.password
-    var profile_img = url + Date.now() + path.extname(req.file.filename)
+    var profile_img = url + req.file.filename
     if (errors.isEmpty) {
-        if (!req.file) {
-            res.json({message: "Image Missing"})
-        }
-        else{
-            customer.CreateCustomerTable()
-            .then(() => customer.addCustomer(first_name, last_name, email, gender, phone_number, password, profile_img))
-            .then(() => customer.getCustomerByEmail(email))
-            .then((data) => {
-                res.json({message: "Successfully Registered", data})
+        customer.CreateCustomerTable()
+        .then(() => customer.addCustomer(first_name, last_name, email, gender, phone_number, password, profile_img))
+        .then(() => customer.getCustomerByEmail(email))
+        .then((data) => {
+            res.json({message: "Successfully Registered", data})
+        })
+        .catch((err) => {
+            res.json({message: "Not Registered", error: err})
             })
-            .catch((err) => {
-                res.json({message: "Not Registered", error: err})
-                })
-            }
-        
         }
     else{
         res.json({error: errors.array()})
         return
-        }
+    }
 
 }
 
@@ -82,28 +76,32 @@ exports.showCustomerProfile = function(req, res) {
     })
 }
 
+exports.showAllTheCustomers = function(req, res) {
+    customer.getAllCustomers()
+    .then((data) => {
+        res.json(data)
+    })
+    .catch((err) => {
+        res.json(err)
+    })
+}
+
 exports.UpdateCustomerProfile = function(req, res){
     var errors = validationResult(req)
     var firstname = req.body.first_name
     var lastname = req.body.last_name
     var phonenumber = req.body.phone_number
-    var profile_img = url + Date.now() + path.extname(req.file.filename)
+    var profile_img = url + req.file.filename
     var user_id = req.params.user_id
 
     if (errors.isEmpty) {
-        if (!req.file) {
-            res.json({message: "No File"})
-        }
-        else{
-            customer.updateCustomer(firstname, lastname, phonenumber, user_id, profile_img)
-            .then(() => {
-                res.json({message: "Updated"})
-            })
-            .catch((err) => {
-                res.json({message: err})
-            })
-        }
-        
+        customer.updateCustomer(firstname, lastname, phonenumber, user_id, profile_img)
+        .then(() => {
+            res.json({message: "Updated"})
+        })
+        .catch((err) => {
+            res.json({message: err})
+        }) 
     }
     else{
         res.json({message: "Error"})

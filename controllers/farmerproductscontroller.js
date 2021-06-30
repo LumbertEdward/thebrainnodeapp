@@ -20,19 +20,14 @@ exports.AddProduct = function(req, res, next){
     var product_name = req.body.product_name
     var product_description = req.body.product_description
     var product_price = req.body.product_price
-    var product_image = url + Date.now() + path.extname(req.file.filename)
+    var product_image = url + req.file.filename
     if (errors.isEmpty) {
-        if (!req.file) {
-            res.json({message: "Image Missing"})
-        }
-        else{
-            farmer.createProductsTable()
-            .then(() => farmer.addProduct(farmer_id, product_name, product_description, product_price, product_image))
-            .then(() => farmer.viewAllFarmerProducts(farmer_id))
-            .then(() => {
-                res.json({message: "Added Successfully"})
-            })
-        }
+        farmer.createProductsTable()
+        .then(() => farmer.addProduct(farmer_id, product_name, product_description, product_price, product_image))
+        .then(() => farmer.viewAllFarmerProducts(farmer_id))
+        .then(() => {
+            res.json({message: "Added Successfully"})
+        })
     }
     else{
         res.json({error: errors.array()})
@@ -54,7 +49,7 @@ exports.UpdateSelectedProduct = function(req, res){
     var product_name = req.body.product_name
     var product_description = req.body.product_description
     var product_price = req.body.product_price
-    var product_image = req.body.product_image
+    var product_image = url + req.file.filename
     farmer.updateProduct(product_name, product_description, product_price, product_image, product_id)
     .then(() => farmer.viewProductDetails(product_id))
     .then((data) => {
