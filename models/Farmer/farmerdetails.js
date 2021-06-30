@@ -14,21 +14,22 @@ class FarmerRegistration{
             bio TEXT NOT NULL,
             profile_pic TEXT NOT NULL,
             id_number INTEGER NOT NULL UNIQUE,
+            location TEXT NOT NULL,
             password TEXT NOT NULL
         )`
 
         return this.dao.run(sql)
     }
 
-    insertFarmer(firstname, lastname, email, gender, phonenumbr, bio, profilepic = " ", idNumber, password){
-        const sql = `INSERT INTO farmer (first_name, last_name, email, gender, phone_number, bio, profile_pic, id_number, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        const params = [firstname, lastname, email, gender, phonenumbr, bio, profilepic, idNumber, password]
+    insertFarmer(firstname, lastname, email, gender, phonenumbr, bio, profilepic = " ", idNumber, password, location){
+        const sql = `INSERT INTO farmer (first_name, last_name, email, gender, phone_number, bio, profile_pic, id_number, password, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        const params = [firstname, lastname, email, gender, phonenumbr, bio, profilepic, idNumber, password, location]
         return this.dao.run(sql, params)
     }
 
-    updateFarmer(firstname, lastname, phonenumbr, bio, profilepic, idNumber, farmer_id){
-        const sql = `UPDATE farmer SET first_name = ?, last_name = ?, phone_number = ?, bio = ?, profile_pic = ?, id_number = ? WHERE farmer_id = ?`
-        const params = [firstname, lastname, phonenumbr, bio, profilepic, idNumber, farmer_id]
+    updateFarmer(firstname, lastname, phonenumbr, bio, profilepic, idNumber, location, farmer_id){
+        const sql = `UPDATE farmer SET first_name = ?, last_name = ?, phone_number = ?, bio = ?, profile_pic = ?, id_number = ?, location = ? WHERE farmer_id = ?`
+        const params = [firstname, lastname, phonenumbr, bio, profilepic, idNumber, location, farmer_id]
         return this.dao.run(sql, params)
 
     }
@@ -61,6 +62,11 @@ class FarmerRegistration{
         const sql = `SELECT * FROM farmer`
         const params = []
         return this.dao.all(sql, params)
+    }
+
+    dropTable(){
+        const sql = `DROP TABLE farmer`
+        return this.dao.run(sql)
     }
 }
 

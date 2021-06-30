@@ -16,12 +16,13 @@ exports.FarmerRegister = function(req, res, next){
     var gender = req.body.gender
     var phone_number = req.body.phone_number
     var bio = req.body.bio
-    var profile_pic = url + req.file.filename
     var id_number = req.body.id_number
     var password = req.body.password
+    var location = req.body.location
+    var profile_pic = url + req.file.filename
     if (errors.isEmpty) {
         farmer.createTable()
-        .then(() => farmer.insertFarmer(first_name, last_name, email, gender, phone_number, bio, profile_pic, id_number, password))
+        .then(() => farmer.insertFarmer(first_name, last_name, email, gender, phone_number, bio, profile_pic, id_number, password, location))
         .then(() => farmer.getFarmerByEmail(email))
         .then((data) => {
             res.json({message: "Successfully Registered", data})

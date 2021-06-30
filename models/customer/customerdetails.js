@@ -12,21 +12,22 @@ class Customer{
             gender TEXT NOT NULL,
             phone_number TEXT NOT NULL,
             profile_img TEXT NOT NULL,
+            location TEXT NOT NULL,
             password TEXT NOT NULL
         )`
 
         return this.dao.run(sql)
     }
 
-    addCustomer(firstname, lastname, email, gender, phonenumber, password, profile_img = " "){
-        const sql = `INSERT INTO customer (first_name, last_name, email, gender, phone_number, password, profile_img) VALUES (?, ?, ?, ?, ?, ?, ?)`
-        const params = [firstname, lastname, email, gender, phonenumber, password, profile_img]
+    addCustomer(firstname, lastname, email, gender, phonenumber, password, profile_img = " ", location){
+        const sql = `INSERT INTO customer (first_name, last_name, email, gender, phone_number, password, profile_img, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+        const params = [firstname, lastname, email, gender, phonenumber, password, profile_img, location]
         return this.dao.run(sql, params)
     }
 
-    updateCustomer(firstname, lastname, phonenumber, user_id, profile_img = " "){
-        const sql = `UPDATE customer SET first_name = ?, last_name = ?, phone_number = ?, profile_img = ? WHERE userId = ?`
-        const params = [firstname,lastname, phonenumber, profile_img, user_id]
+    updateCustomer(firstname, lastname, phonenumber, user_id, profile_img = " ", location){
+        const sql = `UPDATE customer SET first_name = ?, last_name = ?, phone_number = ?, profile_img = ?, location = ? WHERE userId = ?`
+        const params = [firstname,lastname, phonenumber, profile_img, location, user_id]
         return this.dao.run(sql, params)
 
     }
