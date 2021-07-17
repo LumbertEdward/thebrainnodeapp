@@ -52,5 +52,5 @@ jobs:
       with:
         app-name: 'farmerandcustomerapi'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_aadd878f42434f7f84eb06f34f3b6d0e }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_60b02fd69bae4352a8681260e95b85b5 }}
         package: .
