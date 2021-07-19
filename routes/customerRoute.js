@@ -1,5 +1,5 @@
 var express = require('express');
-const { ProductDetails, Products, ProductType, GoogleUserRegister, AddNotification, viewNotification, GoogleLogin, Login, Register, AddToCart, OrderProducts, AddOrderProducts, ViewShoppingCartItems, ViewShoppingCartItemsDetails, RemoveItemFromCart, MakeOrder, ViewMyOrders, MypendingOrders, MyCompletedOrders, showCustomerProfile, UpdateCustomerProfile, showAllTheCustomers } = require('../controllers/customer/customercontrollers');
+const { ProductDetails, Products, ProductType, GoogleUserRegister, AddNotification, viewNotification, GoogleLogin, Login, Register, AddToCart, OrderProducts, AddOrderProducts, ViewShoppingCartItems, ViewShoppingCartItemsDetails, RemoveItemFromCart, MakeOrder, ViewMyOrders, MypendingOrders, MyCompletedOrders, showCustomerProfile, UpdateCustomerProfile, showAllTheCustomers, viewAllNotification } = require('../controllers/customer/customercontrollers');
 const { route } = require('./farmerroutes');
 var router = express.Router();
 var urlencodedParser = express.urlencoded({ extended: false })
@@ -49,5 +49,6 @@ router.post('/products/checkout', AddOrderProducts) // add order products
 //notifications
 router.post('/notifications', AddNotification) //add notification
 router.get('/notifications/:user_id', viewNotification) //view user notification
+router.get('/notifications/all', viewAllNotification) //view all notifications
 
 module.exports = router;

@@ -335,8 +335,9 @@ exports.AddNotification = function(req, res){
     var notification_date = req.body.notification_date
     Notifications.CreateNotification()
     .then(() => Notifications.addNotification(user_id, notification, notification_date))
-    .then(() => {
-        res.json({message: "Success"})
+    .then(() => Notifications.viewUserNotifications(user_id))
+    .then((data) => {
+        res.json(data)
     })
 }
 
@@ -345,6 +346,17 @@ exports.viewNotification = function(req, res) {
     Notifications.viewUserNotifications(user_id)
     .then((data) => {
         res.json(data)
+    })
+    
+}
+
+exports.viewAllNotification = function(req, res) {
+    Notifications.viewAllNotifications()
+    .then((data) => {
+        res.json(data)
+    })
+    .catch((err) => {
+        res.json({message: err})
     })
     
 }

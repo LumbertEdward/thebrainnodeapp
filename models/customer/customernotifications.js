@@ -25,7 +25,12 @@ class CustomerNotifications{
         const params = [user_id]
         return this.dao.all(sql, params)
     }
-    
+
+    viewAllNotifications(){
+        const sql = `SELECT * FROM customernotifications`
+        return this.dao.all(sql)
+    }
+
 }
 
 module.exports = CustomerNotifications
