@@ -47,7 +47,7 @@ router.get('/products/:order_id/orders/vieworderproducts', OrderProducts) //view
 router.post('/products/checkout', AddOrderProducts) // add order products
 
 //notifications
-router.post('/notifications', urlencodedParser, AddNotification) //add notification
+router.post('/notifications', AddNotification) //add notification
 router.get('/notifications/:user_id', viewNotification) //view user notification
 
 module.exports = router;
