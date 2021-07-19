@@ -25,6 +25,12 @@ class Customer{
         return this.dao.run(sql, params)
     }
 
+    addGoogleCustomer(firstname, lastname, email, profile_img, gender = "Unknown", phonenumber = "Unknown", password = "123456", location = "Unknown"){
+        const sql = `INSERT INTO customer (first_name, last_name, email, profile_img, gender, phone_number, password, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+        const params = [firstname, lastname, email, profile_img, gender, phonenumber, password, location]
+        return this.dao.run(sql, params)
+    }
+
     updateCustomer(firstname, lastname, phonenumber, user_id, profile_img = " ", location){
         const sql = `UPDATE customer SET first_name = ?, last_name = ?, phone_number = ?, profile_img = ?, location = ? WHERE userId = ?`
         const params = [firstname,lastname, phonenumber, profile_img, location, user_id]
@@ -41,19 +47,19 @@ class Customer{
     getCustomerById(id){
         const sql = `SELECT * FROM customer WHERE userId = ?`
         const params = [id]
-        return this.dao.get(sql, params)
+        return this.dao.all(sql, params)
     }
 
     getCustomerByEmail(email){
         const sql = `SELECT * FROM customer WHERE email = ?`
         const params = [email]
-        return this.dao.get(sql, params)
+        return this.dao.all(sql, params)
     }
 
     getCustomerByEmailAndPassword(email, password){
         const sql = `SELECT * FROM customer WHERE email = ? AND password = ?`
         const params = [email, password]
-        return this.dao.get(sql, params)
+        return this.dao.all(sql, params)
     }
 
     getAllCustomers(){

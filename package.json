@@ -22,5 +22,18 @@
     "sqlite3": "^5.0.2",
     "stream": "0.0.2",
     "util": "^0.12.4"
-  }
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LumbertEdward/thebrainnodeapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LumbertEdward/thebrainnodeapp/issues"
+  },
+  "homepage": "https://github.com/LumbertEdward/thebrainnodeapp#readme",
+  "description": ""
 }

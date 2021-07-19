@@ -6,7 +6,7 @@ const farmer = new AgriculturalTraining(conn)
 const enrolled = new EnrolledTrainings(conn)
 const { body,validationResult } = require('express-validator')
 const path = require('path')
-const url = "http://localhost:9000/images/trainings/"
+const url = "images/trainings/"
 
 exports.CreateTraining = function(req, res){
     const errors = validationResult(req)

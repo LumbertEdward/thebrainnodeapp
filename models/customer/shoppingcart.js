@@ -8,15 +8,22 @@ class Shoppingcart{
             cart_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             userId INTEGER NOT NULL,
             product_id INTEGER NOT NULL,
-            farmer_id INTEGER NOT NULL
+            farmer_id INTEGER NOT NULL,
+            product_name TEXT NOT NULL,
+            product_description TEXT NOT NULL,
+            product_price INTEGER NOT NULL,
+            product_image TEXT NOT NULL,
+            product_type TEXT NOT NULL,
+            product_calcs INTEGER NOT NULL,
+            product_delivery_time TEXT NOT NULL
         )`
 
         return this.dao.run(sql)
     }
 
-    addToCart(userId, product_id, farmer_id){
-        const sql = `INSERT INTO shoppingcart (userId, product_id, farmer_id) VALUES (?, ?, ?)`
-        const params = [userId, product_id, farmer_id]
+    addToCart(userId, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time){
+        const sql = `INSERT INTO shoppingcart (userId, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        const params = [userId, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time]
         return this.dao.run(sql, params)
     }
 
@@ -27,13 +34,13 @@ class Shoppingcart{
     }
 
     viewCartProductDetails(cart_id){
-        const sql = `SELECT * FROM shoppingcart WHERE cart_id = ?`
+        const sql = `SELECT * FROM shoppingcart WHERE product_id = ?`
         const params = [cart_id]
         return this.dao.get(sql, params)
     }
 
     deleteProductFromCart(cart_id){
-        const sql = `DELETE FROM shoppingcart WHERE cart_id = ?`
+        const sql = `DELETE FROM shoppingcart WHERE product_id = ?`
         const params = [cart_id]
         return this.dao.run(sql, params)
     }

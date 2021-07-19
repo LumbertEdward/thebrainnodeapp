@@ -6,7 +6,7 @@ const { body,validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs');
 const path = require('path')
-const url = "http://localhost:9000/images/profile/"
+const url = "images/profile/"
 
 exports.FarmerRegister = function(req, res, next){
     var errors = validationResult(req)

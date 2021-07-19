@@ -59,11 +59,11 @@ router.get('/allfarmers/:id/profile', ShowFarmerProfile) //view farmer profile
 router.get('/allfarmers/:id/profile/update', upload, urlencodedParser, UpdateFarmerProfile) //update farmer profile
 
 /* GET FARMER PRODUCTS */ 
-router.get('/:id/products', ViewProducts) //view farmer product
-router.post('/products/addproduct', uploadproducts, urlencodedParser, AddProduct) //add a product
-router.get('/:id/products/:product_id', ViewSelectedProductDetails) //view product details
-router.post('/:id/products/:product_id/update', urlencodedParser, UpdateSelectedProduct) //update product details
-router.get('/:id/products/:product_id/delete', DeleteSelectedProduct) //delete a product
+router.get('/:farmer_id/products', ViewProducts) //view farmer product
+router.post('/:farmer_id/products/addproduct', uploadproducts, urlencodedParser, AddProduct) //add a product
+router.get('/:farmer_id/products/:product_id', ViewSelectedProductDetails) //view product details
+router.post('/:farmer_id/products/:product_id/update', urlencodedParser, UpdateSelectedProduct) //update product details
+router.get('/:farmer_id/products/:product_id/delete', DeleteSelectedProduct) //delete a product
 
 /* GET FARMER-CUSTOMER ORDERS */
 router.get('/:farmer_id/orders', MyOrders) //view farmer orders

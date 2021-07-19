@@ -4,7 +4,7 @@ const conn = new FarmerConnection('./agriculture')
 const farmer = new CropRecommendation(conn)
 const { body,validationResult } = require('express-validator')
 const path = require('path')
-const url = "http://localhost:9000/images/products/"
+const url = "images/products/"
 
 exports.NewRecommendation = function(req, res){
     var errors = validationResult(req)
