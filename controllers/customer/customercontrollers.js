@@ -4,16 +4,19 @@ const CustomerOrders = require('../../models/customer/customerorders')
 const CustomerOrderProducts = require('../../models/customer/customerordersproducts')
 const FarmerProducts = require('../../models/Farmer/productdetails')
 const ShoppingCart = require('../../models/customer/shoppingcart')
+const CustomerNotifications = require('../../models/customer/customernotifications')
 const conn = new CustomerConnection('./agriculture')
 const customer = new CustomerRegister(conn)
 const orders = new CustomerOrders(conn)
 const farmerProds = new FarmerProducts(conn)
 const shopping = new ShoppingCart(conn)
 const OrderProduct = new CustomerOrderProducts(conn)
+const Notifications = new CustomerNotifications(conn)
 const { body,validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs');
 const path = require('path')
+
 const url = "images/profile/"
 
 exports.Login = function(req, res){
@@ -322,4 +325,26 @@ exports.RemoveItemFromCart = function(req, res){
     .catch((err) => {
         res.json({message: `Error, ${cart_item_id} Not Removed`})
     })
+}
+
+//notifications
+
+exports.AddNotification = function(req, res){
+    var user_id = req.body.user_id
+    var notification = req.body.notification
+    var notification_date = req.body.notification_date
+    Notifications.CreateNotification()
+    .then(() => Notifications.addNotification(user_id, notification, notification_date))
+    .then(() => {
+        res.json({message: "Success"})
+    })
+}
+
+exports.viewNotification = function(req, res) {
+    var user_id = req.params.user_id
+    Notifications.viewUserNotifications(user_id)
+    .then((data) => {
+        res.json(data)
+    })
+    
 }
