@@ -378,7 +378,7 @@ exports.AddFavourites = function(req, res) {
 
     Favourites.createFavouritesTable()
     .then(() => Favourites.addToFavourites(user_id, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time))
-    .then(() => Favourites.ViewFavourites(user_id))
+    .then(() => Favourites.viewUserFavourites(user_id))
     .then((data) => {
         res.json(data)
     })
@@ -397,6 +397,15 @@ exports.DeleteFavourites = function(req, res) {
     var product_id = req.query.product_id
     Favourites.deleteFavourite(user_id, product_id)
     .then(() => Favourites.viewUserFavourites(user_id))
+    .then((data) => {
+        res.json(data)
+    })
+}
+
+exports.CheckFavourites = function(req, res) {
+    var user_id = req.query.user_id
+    var product_id = req.query.product_id
+    Favourites.checkProduct(user_id, product_id)
     .then((data) => {
         res.json(data)
     })

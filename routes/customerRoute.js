@@ -1,5 +1,5 @@
 var express = require('express');
-const { ProductDetails, Products, ProductType, GoogleUserRegister, AddNotification, viewNotification, GoogleLogin, Login, Register, AddToCart, OrderProducts, AddOrderProducts, ViewShoppingCartItems, ViewShoppingCartItemsDetails, RemoveItemFromCart, MakeOrder, ViewMyOrders, MypendingOrders, MyCompletedOrders, showCustomerProfile, UpdateCustomerProfile, showAllTheCustomers, viewAllNotification, AddFavourites, ViewFavourites, DeleteFavourites } = require('../controllers/customer/customercontrollers');
+const { ProductDetails, Products, ProductType, GoogleUserRegister, AddNotification, viewNotification, GoogleLogin, Login, Register, AddToCart, OrderProducts, AddOrderProducts, ViewShoppingCartItems, ViewShoppingCartItemsDetails, RemoveItemFromCart, MakeOrder, ViewMyOrders, MypendingOrders, MyCompletedOrders, showCustomerProfile, UpdateCustomerProfile, showAllTheCustomers, viewAllNotification, AddFavourites, ViewFavourites, DeleteFavourites, CheckFavourites } = require('../controllers/customer/customercontrollers');
 const { route } = require('./farmerroutes');
 var router = express.Router();
 var urlencodedParser = express.urlencoded({ extended: false })
@@ -55,5 +55,6 @@ router.get('/notifications/all', viewAllNotification) //view all notifications
 router.post('/favourites', AddFavourites) //add Favourites
 router.get('/favourites/products', ViewFavourites) //view Favourites
 router.get('/favourites/products/delete', DeleteFavourites) //delete product
+router.get('/favourites/products/check', CheckFavourites) //check product
 
 module.exports = router;

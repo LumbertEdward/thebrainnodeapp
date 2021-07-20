@@ -36,7 +36,7 @@ class CustomerFavourites{
     checkProduct(user_id, product_id){
         const sql = `SELECT * FROM customerfavourites WHERE product_id = ?, user_id = ?`
         const params = [product_id, user_id]
-        return this.dao.get(sql, params)
+        return this.dao.all(sql, params)
     }
 
     deleteFavourite(user_id, product_id){
