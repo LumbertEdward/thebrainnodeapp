@@ -126,7 +126,7 @@ exports.UpdateCustomerProfile = function(req, res){
     var firstname = req.body.first_name
     var lastname = req.body.last_name
     var phonenumber = req.body.phone_number
-    var profile_img = url + req.file.filename
+    var profile_img = " "
     var location = req.body.location
     var user_id = req.params.user_id
 

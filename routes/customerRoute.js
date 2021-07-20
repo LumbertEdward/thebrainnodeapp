@@ -25,7 +25,7 @@ router.post('/googleLogin', GoogleLogin) //google login
 router.post('/register', Register) //register customer
 router.post('/googleRegister', GoogleUserRegister) //register google users
 router.get('/:user_id/profile', showCustomerProfile) //show profile
-router.get('/:user_id/profile/update', upload, UpdateCustomerProfile) //update profile
+router.post('/:user_id/profile/update', UpdateCustomerProfile) //update profile
 router.get('/all', showAllTheCustomers)
 
 /* GET PRODUCTS */
