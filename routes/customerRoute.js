@@ -52,7 +52,7 @@ router.get('/notifications/:user_id', viewNotification) //view user notification
 router.get('/notifications/all', viewAllNotification) //view all notifications
 
 //favourites
-router.post('/favourites', AddFavourites) //add Favourites
+router.post('/favourites', urlencodedParser, AddFavourites) //add Favourites
 router.get('/favourites/products', ViewFavourites) //view Favourites
 router.get('/favourites/products/delete', DeleteFavourites) //delete product
 router.get('/favourites/products/check', CheckFavourites) //check product

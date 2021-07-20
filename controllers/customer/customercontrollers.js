@@ -367,17 +367,9 @@ exports.viewAllNotification = function(req, res) {
 exports.AddFavourites = function(req, res) {
     var user_id = req.body.user_id
     var product_id = req.body.product_id
-    var farmer_id = req.body.farmer_id
-    var product_name = req.body.product_name
-    var product_description = req.body.product_description
-    var product_price = req.body.product_price
-    var product_type = req.body.product_type
-    var product_calcs = req.body.product_calcs
-    var product_delivery_time = req.body.product_delivery_time
-    var product_image = req.body.product_image
 
     Favourites.createFavouritesTable()
-    .then(() => Favourites.addToFavourites(user_id, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time))
+    .then(() => Favourites.addFavourites(user_id, product_id))
     .then(() => Favourites.viewUserFavourites(user_id))
     .then((data) => {
         res.json(data)
