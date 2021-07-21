@@ -280,6 +280,7 @@ exports.AddToCart = function(req, res){
     var product_id = req.params.product_id
     var userId = req.params.userId
     var farmer_id = req.params.farmer_id
+    var total_items = req.body.total_items
     var product_name = req.body.product_name
     var product_description = req.body.product_description
     var product_price = req.body.product_price
@@ -288,7 +289,7 @@ exports.AddToCart = function(req, res){
     var product_delivery_time = req.body.product_delivery_time
     var product_image = url + req.body.photo
     shopping.createShoppingCartTable()
-    .then(() => shopping.addToCart(userId, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time))
+    .then(() => shopping.addToCart(userId, product_id, total_items, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time))
     .then(() => {
         res.json({message: "Added"})
     })    
