@@ -329,6 +329,16 @@ exports.RemoveItemFromCart = function(req, res){
     })
 }
 
+exports.DeleteCart = function(req, res){
+    shopping.dropTable()
+    .then(() => {
+        res.json({message: `Removed`})
+    })
+    .catch((err) => {
+        res.json({message: `Not Removed`})
+    })
+}
+
 //notifications
 
 exports.AddNotification = function(req, res){
