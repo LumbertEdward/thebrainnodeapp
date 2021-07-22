@@ -34,7 +34,7 @@ router.get('/products/type', ProductType) //view by type
 router.get('/products/:product_id/', ProductDetails) //view product details
 
 /* shopping cart */
-router.post('/products/:product_id/:farmer_id/:userId/:total_items/shoppingcart/add/', AddToCart) //add to cart
+router.get('/products/:product_id/:farmer_id/:userId/:total_items/shoppingcart/add/', AddToCart) //add to cart
 router.get('/products/:user_id/shoppingcart', ViewShoppingCartItems) //view shopping cart
 router.get('/products/:user_id/shoppingcart/:cart_item_id/details', ViewShoppingCartItemsDetails) //view cart item details
 router.get('/products/:user_id/shoppingcart/:cart_item_id/delete', RemoveItemFromCart) //delete cart item
