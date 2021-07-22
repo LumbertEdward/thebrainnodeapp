@@ -313,9 +313,6 @@ exports.ViewShoppingCartItems = function(req, res){
     .then((data) => {
         res.json(data)
     })
-    .catch((err) => {
-        res.json(err)
-    })
 }
 
 exports.ViewShoppingCartItemsDetails = function(req, res){
@@ -323,9 +320,6 @@ exports.ViewShoppingCartItemsDetails = function(req, res){
     MyCart.viewCartProductDetails(cart_item_id)
     .then(() => {
         res.json(data.row)
-    })
-    .catch((err) => {
-        res.json(err)
     })
 }
 
