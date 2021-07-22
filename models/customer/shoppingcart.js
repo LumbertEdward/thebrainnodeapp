@@ -8,7 +8,6 @@ class Shoppingcart{
             cart_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             userId INTEGER NOT NULL,
             product_id INTEGER NOT NULL,
-            total_items INTEGER NOT NULL,
             farmer_id INTEGER NOT NULL,
             product_name TEXT NOT NULL,
             product_description TEXT NOT NULL,
@@ -22,9 +21,9 @@ class Shoppingcart{
         return this.dao.run(sql)
     }
 
-    addToCart(userId, product_id, total_items, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time){
+    addToCart(userId, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time){
         const sql = `INSERT INTO shoppingcart (userId, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        const params = [userId, product_id, total_items, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time]
+        const params = [userId, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time]
         return this.dao.run(sql, params)
     }
 

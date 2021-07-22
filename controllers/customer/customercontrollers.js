@@ -3,14 +3,14 @@ const CustomerRegister = require('../../models/customer/customerdetails')
 const CustomerOrders = require('../../models/customer/customerorders')
 const CustomerOrderProducts = require('../../models/customer/customerordersproducts')
 const FarmerProducts = require('../../models/Farmer/productdetails')
-const ShoppingCart = require('../../models/customer/shoppingcart')
 const CustomerNotifications = require('../../models/customer/customernotifications')
 const CustomerFavourites = require('../../models/customer/customerfavourites')
+const CustCart = require('../../models/customer/customercart')
 const conn = new CustomerConnection('./agriculture')
+const MyCart = new CustCart(conn)
 const customer = new CustomerRegister(conn)
 const orders = new CustomerOrders(conn)
 const farmerProds = new FarmerProducts(conn)
-const shopping = new ShoppingCart(conn)
 const OrderProduct = new CustomerOrderProducts(conn)
 const Notifications = new CustomerNotifications(conn)
 const Favourites = new CustomerFavourites(conn)
@@ -51,6 +51,7 @@ exports.GoogleLogin = function(req, res){
 
 exports.Register = function(req, res){
     var errors = validationResult(req)
+    var userId = req.body.userId
     var first_name = req.body.first_name
     var last_name = req.body.last_name
     var email = req.body.email
@@ -61,14 +62,12 @@ exports.Register = function(req, res){
     var profile_img = "Unknown"
     if (errors.isEmpty) {
         customer.CreateCustomerTable()
-        .then(() => customer.addCustomer(first_name, last_name, email, gender, phone_number, password, profile_img, location))
+        .then(() => customer.addCustomer(userId, first_name, last_name, email, gender, phone_number, password, profile_img, location))
         .then(() => customer.getCustomerByEmail(email))
         .then((data) => {
             res.json(data)
         })
-        .catch((err) => {
-            res.json({message: "Not Registered", error: err})
-            })
+        
         }
     else{
         res.json({error: errors.array()})
@@ -79,13 +78,14 @@ exports.Register = function(req, res){
 
 exports.GoogleUserRegister = function(req, res) {
     var errors = validationResult(req)
+    var userId = req.body.userId
     var first_name = req.body.first_name
     var last_name = req.body.last_name
     var email = req.body.email
     var photo = req.body.photo
     if (errors.isEmpty) {
         customer.CreateCustomerTable()
-        .then(() => customer.addGoogleCustomer(first_name, last_name, email, photo))
+        .then(() => customer.addGoogleCustomer(userId, first_name, last_name, email, photo))
         .then(() => customer.getCustomerByEmail(email))
         .then((data) => {
             res.json(data)
@@ -181,6 +181,7 @@ exports.MakeOrder = function(req, res){
     var order_price = req.body.order_price
     var order_id = req.body.order_id
     var delivery_date = req.body.delivery_date
+    var delivery_time = req.body.delivery_time
     var now = new Date()
     var time = now.toLocaleDateString();
     var order_date = time
@@ -190,7 +191,7 @@ exports.MakeOrder = function(req, res){
     var delivery_date = devDate2.toLocaleDateString()
     var status = "pending"
     orders.createCustomerOrdersTable()
-    .then(() => orders.makeOrder(order_id, userId, order_price, order_date , delivery_date, status))
+    .then(() => orders.makeOrder(order_id, userId, order_price, order_date , delivery_date, delivery_time, status))
     .then(() => {
         res.json({message: "Item Ordered"})
     })
@@ -280,25 +281,35 @@ exports.AddToCart = function(req, res){
     var product_id = req.params.product_id
     var userId = req.params.userId
     var farmer_id = req.params.farmer_id
-    var total_items = req.body.total_items
+    var total_items = req.params.total_items
+    MyCart.createShoppingCartTable()
+    .then(() => MyCart.addToCart(userId, product_id, farmer_id, total_items))
+    .then(() => {
+        res.json({message: "Added"})
+    })    
+}
+
+/**exports.AddToCart = function(req, res){
+    var product_id = req.params.product_id
+    var userId = req.params.userId
+    var farmer_id = req.params.farmer_id
     var product_name = req.body.product_name
     var product_description = req.body.product_description
     var product_price = req.body.product_price
     var product_type = req.body.product_type
     var product_calcs = req.body.product_calcs
     var product_delivery_time = req.body.product_delivery_time
-    var product_image = url + req.body.photo
+    var product_image = req.body.product_image
     shopping.createShoppingCartTable()
-    .then(() => shopping.addToCart(userId, product_id, total_items, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time))
+    .then(() => shopping.addToCart(userId, product_id, farmer_id, product_name, product_description, product_price, product_image, product_type, product_calcs, product_delivery_time))
     .then(() => {
         res.json({message: "Added"})
     })    
-
-}
+}**/
 
 exports.ViewShoppingCartItems = function(req, res){
     var userId = req.params.user_id
-    shopping.viewCartProducts(userId)
+    MyCart.viewCartProducts(userId)
     .then((data) => {
         res.json(data)
     })
@@ -309,7 +320,7 @@ exports.ViewShoppingCartItems = function(req, res){
 
 exports.ViewShoppingCartItemsDetails = function(req, res){
     var cart_item_id = req.params.cart_item_id
-    shopping.viewCartProductDetails(cart_item_id)
+    MyCart.viewCartProductDetails(cart_item_id)
     .then(() => {
         res.json(data.row)
     })
@@ -321,7 +332,7 @@ exports.ViewShoppingCartItemsDetails = function(req, res){
 
 exports.RemoveItemFromCart = function(req, res){
     var cart_item_id = req.params.cart_item_id
-    shopping.deleteProductFromCart(cart_item_id)
+    MyCart.deleteProductFromCart(cart_item_id)
     .then(() => {
         res.json({message: `${cart_item_id} Removed`})
     })
@@ -331,7 +342,7 @@ exports.RemoveItemFromCart = function(req, res){
 }
 
 exports.DeleteCart = function(req, res){
-    shopping.dropTable()
+    MyCart.dropTable()
     .then(() => {
         res.json({message: `Removed`})
     })

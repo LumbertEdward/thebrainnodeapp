@@ -7,19 +7,20 @@ class CustomerOrders{
         const sql = `CREATE TABLE IF NOT EXISTS customerorders (
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             order_id TEXT NOT NULL,
-            userId INTEGER NOT NULL,
+            userId TEXT NOT NULL,
             order_price INTEGER NOT NULL,
             order_date TEXT NOT NULL,
             delivery_date TEXT NOT NULL,
+            delivery_time TEXT NOT NULL,
             status TEXT NOT NULL
         )`
 
         return this.dao.run(sql)
     }
 
-    makeOrder(order_id, userId, order_price, order_date, delivery_date, status){
-        const sql = `INSERT INTO customerorders (order_id, userId, order_price, order_date, delivery_date, status) VALUES (?, ?, ?, ?, ?, ?)`
-        const params = [order_id, userId, order_price, order_date, delivery_date, status]
+    makeOrder(order_id, userId, order_price, order_date, delivery_date, delivery_time, status){
+        const sql = `INSERT INTO customerorders (order_id, userId, order_price, order_date, delivery_date, delivery_time, status) VALUES (?, ?, ?, ?, ?, ?, ?)`
+        const params = [order_id, userId, order_price, order_date, delivery_date, delivery_time, status]
         return this.dao.run(sql, params)
     }
 

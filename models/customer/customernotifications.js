@@ -6,7 +6,7 @@ class CustomerNotifications{
     CreateNotification(){
         const sql = `CREATE TABLE IF NOT EXISTS customernotifications(
             notifiation_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
+            user_id TEXT NOT NULL,
             notification TEXT NOT NULL,
             notification_date TEXT NOT NULL
         )`

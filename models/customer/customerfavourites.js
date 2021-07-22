@@ -6,7 +6,7 @@ class CustomerFavourites{
     createFavouritesTable(){
         const sql = `CREATE TABLE IF NOT EXISTS customerfavourites(
             fav_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
+            user_id TEXT NOT NULL,
             product_id INTEGER NOT NULL
         )`
 

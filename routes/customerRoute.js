@@ -34,7 +34,7 @@ router.get('/products/type', ProductType) //view by type
 router.get('/products/:product_id/', ProductDetails) //view product details
 
 /* shopping cart */
-router.post('/products/:product_id/:farmer_id/:userId/shoppingcart/add/', AddToCart) //add to cart
+router.post('/products/:product_id/:farmer_id/:userId/:total_items/shoppingcart/add/', AddToCart) //add to cart
 router.get('/products/:user_id/shoppingcart', ViewShoppingCartItems) //view shopping cart
 router.get('/products/:user_id/shoppingcart/:cart_item_id/details', ViewShoppingCartItemsDetails) //view cart item details
 router.get('/products/:user_id/shoppingcart/:cart_item_id/delete', RemoveItemFromCart) //delete cart item
@@ -52,7 +52,7 @@ router.get('/notifications/:user_id', viewNotification) //view user notification
 router.get('/notifications/all', viewAllNotification) //view all notifications
 
 //favourites
-router.post('/favourites', urlencodedParser, AddFavourites) //add Favourites
+router.post('/favourites', AddFavourites) //add Favourites
 router.get('/favourites/products', ViewFavourites) //view Favourites
 router.get('/favourites/products/delete', DeleteFavourites) //delete product
 router.get('/favourites/products/check', CheckFavourites) //check product

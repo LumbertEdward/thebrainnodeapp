@@ -5,29 +5,29 @@ class Customer{
 
     CreateCustomerTable(){
         const sql = `CREATE TABLE IF NOT EXISTS customer(
-            userId INTEGER PRIMARY KEY AUTOINCREMENT,
-            first_name TEXT NOT NULL,
-            last_name TEXT NOT NULL,
-            email TEXT NOT NULL UNIQUE,
-            gender TEXT NOT NULL,
-            phone_number TEXT NOT NULL,
-            profile_img TEXT NOT NULL,
-            location TEXT NOT NULL,
-            password TEXT NOT NULL
+            userId TEXT PRIMARY KEY,
+            first_name TEXT,
+            last_name TEXT,
+            email TEXT UNIQUE,
+            gender TEXT,
+            phone_number TEXT,
+            profile_img TEXT,
+            location TEXT,
+            password TEXT
         )`
 
         return this.dao.run(sql)
     }
 
-    addCustomer(firstname, lastname, email, gender, phonenumber, password, profile_img = " ", location){
-        const sql = `INSERT INTO customer (first_name, last_name, email, gender, phone_number, password, profile_img, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-        const params = [firstname, lastname, email, gender, phonenumber, password, profile_img, location]
+    addCustomer(userId, firstname, lastname, email, gender, phonenumber, password, profile_img = "UnKnown", location){
+        const sql = `INSERT INTO customer (userId, first_name, last_name, email, gender, phone_number, password, profile_img, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        const params = [userId, firstname, lastname, email, gender, phonenumber, password, profile_img, location]
         return this.dao.run(sql, params)
     }
 
-    addGoogleCustomer(firstname, lastname, email, profile_img, gender = "Unknown", phonenumber = "Unknown", password = "123456", location = "Unknown"){
-        const sql = `INSERT INTO customer (first_name, last_name, email, profile_img, gender, phone_number, password, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-        const params = [firstname, lastname, email, profile_img, gender, phonenumber, password, location]
+    addGoogleCustomer(userId, firstname, lastname, email, profile_img, gender = "Unknown", phonenumber = "Unknown", password = "123456", location = "Unknown"){
+        const sql = `INSERT INTO customer (userId, first_name, last_name, email, profile_img, gender, phone_number, password, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        const params = [userId, firstname, lastname, email, profile_img, gender, phonenumber, password, location]
         return this.dao.run(sql, params)
     }
 
