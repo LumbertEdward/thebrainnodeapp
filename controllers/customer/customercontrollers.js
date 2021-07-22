@@ -66,8 +66,7 @@ exports.Register = function(req, res){
         .then(() => customer.getCustomerByEmail(email))
         .then((data) => {
             res.json(data)
-        })
-        
+            })
         }
     else{
         res.json({error: errors.array()})
