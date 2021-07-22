@@ -266,9 +266,6 @@ exports.OrderProducts = function(req, res) {
     .then((res) => {
         res.json(res)
     })
-    .catch((err) => {
-        res.json({message: err})
-    })
 }
 
 //shopping cart
