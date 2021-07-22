@@ -251,15 +251,12 @@ exports.MyCompletedOrders = function(req, res){
 exports.AddOrderProducts = function(req, res) {
     var farmer_id = req.body.farmer_id
     var orderId = req.body.order_id
-    var status = req.body.status
+    var status = "Pending"
     var product_id = req.body.product_id
     OrderProduct.createCustomerOrderProducts()
     .then(() => OrderProduct.addOrderProduct(product_id, farmer_id, orderId, status))
     .then(() => {
-        res.json({messag: "Added"})
-    })
-    .catch((err) => {
-        res.json({message: "Error"})
+        res.json({message: "Added"})
     })
 }
 
