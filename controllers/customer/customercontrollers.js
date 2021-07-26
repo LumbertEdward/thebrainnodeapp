@@ -255,16 +255,17 @@ exports.AddOrderProducts = function(req, res) {
     var product_id = req.body.product_id
     OrderProduct.createCustomerOrderProducts()
     .then(() => OrderProduct.addOrderProduct(product_id, farmer_id, orderId, status))
-    .then(() => {
-        res.json({message: "Added"})
+    .then(() => OrderProduct.viewOrderProducts(orderId))
+    .then((data) => {
+        res.json(data)
     })
 }
 
 exports.OrderProducts = function(req, res) {
     var orderId = req.params.order_id
     OrderProduct.viewOrderProducts(orderId)
-    .then((res) => {
-        res.json(res)
+    .then((data) => {
+        res.json(data)
     })
 }
 
