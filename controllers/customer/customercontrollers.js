@@ -41,11 +41,8 @@ exports.Login = function(req, res){
 
 exports.GoogleLogin = function(req, res){
     customer.getCustomerByEmail(req.body.email)
-    .then(() => {
+    .then((data) => {
         res.json(data)
-    })
-    .catch((err) => {
-        res.json({message: "Not Found"})
     })
 }
 
