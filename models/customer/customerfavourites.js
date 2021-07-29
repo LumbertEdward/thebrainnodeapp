@@ -19,6 +19,12 @@ class CustomerFavourites{
         return this.dao.run(sql, params)
     }
 
+    viewFavouriteItem(product_id){
+        const sql = `SELECT * FROM customerfavourites WHERE product_id = ?`
+        const params = [product_id]
+        return this.dao.all(sql, params)
+    }
+
     viewUserFavourites(user_id){
         const sql = `SELECT * FROM customerfavourites WHERE user_id = ?`
         const params = [user_id]

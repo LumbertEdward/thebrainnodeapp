@@ -378,7 +378,7 @@ exports.AddFavourites = function(req, res) {
 
     Favourites.createFavouritesTable()
     .then(() => Favourites.addFavourites(user_id, product_id))
-    .then(() => Favourites.viewUserFavourites(user_id))
+    .then(() => Favourites.viewFavouriteItem(product_id))
     .then((data) => {
         res.json(data)
     })
