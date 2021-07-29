@@ -275,8 +275,9 @@ exports.AddToCart = function(req, res){
     var total_items = req.params.total_items
     MyCart.createShoppingCartTable()
     .then(() => MyCart.addToCart(userId, product_id, farmer_id, total_items))
-    .then(() => {
-        res.json({message: "Added"})
+    .then(() => MyCart.viewCartProductDetails(product_id))
+    .then((data) => {
+        res.json(data)
     })    
 }
 
@@ -307,10 +308,10 @@ exports.ViewShoppingCartItems = function(req, res){
 }
 
 exports.ViewShoppingCartItemsDetails = function(req, res){
-    var cart_item_id = req.params.cart_item_id
-    MyCart.viewCartProductDetails(cart_item_id)
-    .then(() => {
-        res.json(data.row)
+    var product_id = req.params.product_id
+    MyCart.viewCartProductDetails(product_id)
+    .then((data) => {
+        res.json(data)
     })
 }
 

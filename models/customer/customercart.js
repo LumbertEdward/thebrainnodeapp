@@ -27,14 +27,14 @@ class CustCart{
         return this.dao.all(sql, params)
     }
 
-    viewCartProductDetails(cart_id){
+    viewCartProductDetails(product_id){
         const sql = `SELECT * FROM cart WHERE product_id = ?`
-        const params = [cart_id]
-        return this.dao.get(sql, params)
+        const params = [product_id]
+        return this.dao.all(sql, params)
     }
 
     deleteProductFromCart(cart_id){
-        const sql = `DELETE FROM cart WHERE product_id = ?`
+        const sql = `DELETE FROM cart WHERE cart_id = ?`
         const params = [cart_id]
         return this.dao.run(sql, params)
     }
