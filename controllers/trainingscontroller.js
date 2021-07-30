@@ -18,7 +18,7 @@ exports.CreateTraining = function(req, res){
     var application_deadline = req.body.application_deadline
     var number_of_attendees = req.body.number_of_attendees
     var training_img_url = url + req.file.filename
-    if (errors) {
+    if (!errors.isEmpty) {
         res.json({message: "Error"})
     }
     else{

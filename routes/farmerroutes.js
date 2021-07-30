@@ -36,7 +36,7 @@ const trainingstorage = multer.diskStorage({
   }
 })
 
-const uploadtraining = multer({storage: trainingstorage}).single('image')
+const uploadtraining = multer({storage: trainingstorage}).single('file')
 
 //product images
 const productsstorage = multer.diskStorage({
