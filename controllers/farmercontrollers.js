@@ -101,6 +101,6 @@ exports.UpdateFarmerProfile = function(req, res){
 exports.ShowFarmers = function(req, res, next){
     farmer.getAllFarmers()
     .then((data) => {
-        res.json(data.data)
+        res.json(data)
     })
 }
