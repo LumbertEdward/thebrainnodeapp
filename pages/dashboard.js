@@ -1,4 +1,6 @@
 import styles from '../styles/Home.module.css'
+import Image from 'next/image';
+import order from '../public/order.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faFileInvoice, faFileInvoiceDollar, faHome,faMoneyBillWave,faMoneyCheck,faShoppingBasket, faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 import React from 'react';
@@ -50,21 +52,25 @@ export default function Home() {
         <div className = {styles.dashboard__chatbot}>
           <Chatbots/>
         </div>
+        <div className = {styles.production__analysis}>
+        <p>Crop Production Costs</p>
+        <Production/>
+        
+      </div>
       </div>
       <div className = {styles.yields__production}>
       <div className = {styles.yields__analysis}>
         <Yields/>
       </div>
-      <div className = {styles.production__analysis}>
-        <Production/>
+    <div className = {styles.dashboard__orders}>
+      <p>Number of Customer Orders</p>
+      <div className = {styles.dashboard__orderpic}>
+      <Image src ={order} alt = "Customer orders" />
       </div>
+      <p className = {styles.dashboard__ordernumber}>200</p>
+      <button>View orders</button>
+    </div>
       </div>
-      <div className = {styles.dashboard__orders}>
-          <span>Customer orders</span>
-          <span>20</span>
-          <button><a href ="#">View Orders</a></button>
-     
-        </div>
       </div>
       </main>
       <footer className ={styles.footer}>

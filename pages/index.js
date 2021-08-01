@@ -32,7 +32,7 @@ export default function Login() {
   </form>
   <div className = {styles.loginpasswords}>
   <p><a>Forgot Password?</a></p>
-  <p>Do not have an account? <span>Create one</span></p>
+  <p>Do not have an account? <span><a href = "./register">Create one</a></span></p>
   </div>
 </div>
 </div>

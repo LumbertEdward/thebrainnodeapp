@@ -13,6 +13,7 @@ const theme = {
   const config={
     width: "320px",
     height: "500px",
+    floating:true
   };
   
 export default function Chatbots() {

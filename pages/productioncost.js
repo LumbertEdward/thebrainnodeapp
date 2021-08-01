@@ -22,17 +22,18 @@ const data = {
             '#F9F9F9',
             'rgba(30, 153, 230, 0.5)'
 		]
-	}]
+	}],
+	circumference:'10'
 };
 
 export default function Production(){
     return(
 	<div>
-		<p>Crop Production</p>
 		<Pie
 			data={data}
 			width={400}
 			height={400}
+			
 		/>
 	</div>  
 );

@@ -16,13 +16,12 @@ const data = {
       'rgba(36, 148, 36,1)'
      
     ],
-    borderWidth: 1,
     tension: 0.2,
     pointBorderColor:  'rgba(36, 148, 36, 1)',
     pointBackgroundColor: 'rgb(255,255,255)',
     pointRadius:'4',
     fill:true,
-    borderWidth: '1'
+    borderWidth: 0.5
   },
   {
     label: 'Beans',
@@ -37,13 +36,12 @@ const data = {
       'rgba(255, 0, 0, 1)'
      
     ],
-    borderWidth: 1, 
+    borderWidth: 0.5, 
     tension: 0.2,
     pointBorderColor:  'rgba(255, 0, 0, 1)',
     pointBackgroundColor: 'rgb(255,255,255)',
     pointRadius: '4',
-    fill:true,
-    borderWidth:'1'
+    fill:true
   }
 ]
 }

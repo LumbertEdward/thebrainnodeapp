@@ -5,7 +5,7 @@
   height:100vh;
   position:fixed;
   box-shadow: 0px 3px 8px rgba(0,0,0,0.24);
- 
+  width:255px;
   
 }
 .dashboard__sidebar ul{
@@ -21,8 +21,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 5px 20px 0px;
-  border-bottom: 2px solid #F5F5F5;
+  padding: 20px 10px 20px 0px;
+  border-bottom: 1px solid #CCCCCC;
 }
 
 .dashboard__header{
@@ -30,8 +30,8 @@
   align-items: center;
   justify-content: space-between;
   height:60px;
-  width:82.5vw;
-  margin-left: 256px;
+  width:82vw;
+  margin-left: 255px;
   background-color: #0b172e;
   position:fixed;
   font-size: 12px;
@@ -97,7 +97,7 @@
 .dashboard__headerprofile span{
   padding-left: 10px;
   color: lightgray;
-  margin-left: 10px;
+  margin-left: 0px;
 }
 .profile__pic{
   width:50%;
@@ -221,10 +221,7 @@ Charts and chatbots
   box-shadow: 0px 3px 8px rgba(0,0,0,0.24);
   border-radius: 3px;
 }
-.dashboard__chatbot{
-  margin-left: 20px;
-  margin-top: 40px;
-}
+
 .yields__production{
 display: flex;
 }
@@ -243,54 +240,53 @@ display: flex;
   background-color: white;
   width:29%;
   margin-left: 20px;
-  padding:20px;
-  padding-top: 20px;
+  padding-top: 60px;
   margin-top: 40px;
   box-shadow: 0px 3px 8px rgba(0,0,0,0.24);
   border-radius: 3px;
-  margin-bottom: 20px;
-  height: fit-content;
+  margin-bottom: 0px;
+}
+.production__analysis p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -20px;
+  margin-bottom: 40px;
 }
 .dashboard__orders{
   display: flex;
   flex-direction: column;
-  align-self: flex-end;
   align-items: center;
-  justify-content: flex-end;
   background-color: white;
   width:29%;
-  margin-left: 66.5%;
-  padding-left:20px;
-  padding-top: 20px;
-  margin-top: -11%;
+  margin-left: 20px;
+  margin-top: 40px;
   box-shadow: 0px 3px 8px rgba(0,0,0,0.24);
   border-radius: 3px;
   margin-bottom: 20px;
-  height: 100px;
+  padding: 20px;
+
 }
-.dashboard__orders span:nth-child(1){
-  color:rgba(30, 153, 230, 1);
-  font-size: 17px;
-  text-transform: uppercase;
-  padding-bottom: 5px;
+.dashboard__orderpic{
+  width:50%;
+  margin-top: 30px; 
+}
+.dashboard__ordernumber{
+  margin-top: 30px;
   font-weight: 600;
-}
-.dashboard__orders span:nth-child(2){
-  font-weight: 500;
-  font-size: 20px;
+  font-size: 17px;
+  margin-bottom: 20px;
 }
 .dashboard__orders button{
-  outline: none;
+  width:100%;
+  outline:none;
   border:none;
-  background-color: rgba(30, 153, 230, 1);
-  color: white;
-  margin-top: 10px;
-  padding: 5px;
+  padding:10px;
+  background-color: rgba(25, 130, 196,1);
   border-radius: 3px;
-  margin-bottom: 10px;
-  font-weight: 500;
+  color: white;
+  font-size: 15px;
 }
-
 .footer{
   display: flex;
   justify-content: center;

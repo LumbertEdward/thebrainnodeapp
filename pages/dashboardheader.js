@@ -31,11 +31,11 @@ export default function Header() {
             </li>
             <li>
             <FontAwesomeIcon icon={faChartLine} className = {styles.homeicon}/>
-              <a href = "./dashboard">Product Management</a>
+              <a href = "./productmanagement">Product Management</a>
             </li>
             <li>
             <FontAwesomeIcon icon={faShoppingCart} className = {styles.homeicon}/>
-              <a href = "#">Orders</a>
+              <a href = "./orders">Orders</a>
             </li>
             <li>
             <FontAwesomeIcon icon={faGraduationCap} className = {styles.homeicon}/>
