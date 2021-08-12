@@ -4,7 +4,7 @@ import mystyle from '../styles/register.module.css'
 import Image from 'next/image';
 import logo from '../public/logo.png';
 import axios from 'axios';
-function Register(){
+function Registers(){
   const [state, setState] = useState({
       
     first_name: "",
@@ -116,4 +116,4 @@ await axios
 
     } 
 
-export default Register
+export default Registers
